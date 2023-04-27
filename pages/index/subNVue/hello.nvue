@@ -1,0 +1,100 @@
+<template>
+	<div class="hes" @click="stopEvent">
+		<div class="content">
+			<input type="text" v-model="areaTxt" class="uni-dialog-input">
+		</div>
+		<div style="flex-direction: row;">
+		    <button style="flex: 1;" @click="ok">确定</button>
+		    <button style="flex: 1;" @click="escNvue">取消</button>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				areaTxt: '',
+			}
+		},
+		onReady() {
+			// uni.getStorageSync({
+				
+			// 	key: 'id',
+			// 	success(res) {
+			// 		console.log(res.data)
+			// 		this.areaTxt = res.data
+			// 		console.log(this.areaTxt)
+			// 	}
+			// })
+			if (this.areaTxt == '') {
+				console.log("地址为空，设置为默认地址")
+				this.areaTxt = 'http://10.0.0.226/cad/terminal_scanner.php'
+			} else{
+				this.areaTxt = uni.getStorageSync('id');
+				console.log(this.areaTxt)
+			}			
+		},
+		onUnload() {
+			
+		},
+		created() {
+			const vm = this;
+			uni.$on('page-popup', (data) => {
+				switch (data.type) {
+					case 'one':
+						vm.content = data.content;
+					break;
+					case 'two':
+						vm.content = data.content;
+					break;
+				}
+			});
+		},
+		methods: {
+			stopEvent(e) {
+				e.stopPropagation();
+			},
+			escNvue() {
+				const subNVue = uni.getSubNVueById('popup')
+				subNVue.hide('zoom-fade-in', 300)
+			},
+			ok() {
+				this.escNvue()
+				uni.$emit('updata', this.areaTxt)
+				uni.setStorageSync('id', this.areaTxt)
+				uni.getStorage({
+					key: 'id',
+					success(res) {
+						console.log(res.data)
+						this.url = res.data
+						console.log(this.url)
+					}
+				})
+			}
+		}
+		
+	}
+</script>
+
+<style>
+	.hes {
+		/* position: fixed; */
+		top: 0;
+		left: 0;
+		/* width: auto; */
+		border-color: red;
+		border-style: solid;
+		border-width: 1px;
+		border-radius: 20rpx;
+	}
+		
+	.content{
+		/* height: auto; */
+		margin: 30rpx;
+		border-color: blue;
+		border-style: solid;
+		border-width: 1px;
+	}
+	
+</style>

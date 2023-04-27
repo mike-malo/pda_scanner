@@ -1,0 +1,52 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				// "navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "扫描",
+				"navigationBarBackgroundColor": "#aa00ff",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							// "color": "#000000",
+							// "fontSize": "14",
+							// "select": "true",
+							// "text": "设置网页"
+							"text": "设置网页",
+							"fontSize": "14",
+							"width": "auto",
+							"float": "left"
+						},
+						{
+							"text": "刷新",
+							"fontSize": "14"
+							
+						}
+						]
+					},
+					"subNVues": [{
+						"id": "popup",
+						"path": "pages/index/subNVue/hello",
+						"type": "popup",
+						"style": {
+							"margin": "auto",
+							"dock": "top",
+							"width": "80%",
+							"height": "250rpx",
+							"top": "200rpx"
+						}
+					}]
+				}
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}
